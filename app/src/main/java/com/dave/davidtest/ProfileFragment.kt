@@ -15,6 +15,9 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         super.onViewCreated(view, savedInstanceState)
         val binding = FragmentProfileBinding.bind(view)
         fragmentProfileBinding = binding
+
+        binding.tvUid.text = arguments?.getString("id")
+
     }
 
 

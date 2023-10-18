@@ -85,3 +85,34 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 }
 ```
 
+on the Main Activity
+```
+<androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graph" />
+```
+
+Pass data to new fragment
+```
+
+Fragment 1
+binding.btnNext.setOnClickListener {
+            val bundle = bundleOf("id" to "1")
+            view.findNavController().navigate(R.id.profileFragment,bundle)
+        }
+
+Fragment 2
+        binding.tvUid.text = arguments?.getString("id")
+
+        
+```
+
