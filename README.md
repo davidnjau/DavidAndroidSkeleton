@@ -810,3 +810,39 @@ class AdministerVaccineViewModel(application: Application, private val state: Sa
 }
 ```
 
+## FHIR Functions
+
+The different functions that can be used in a fhir application
+
+- Get Observations using observation code
+```
+private suspend fun observationFromCode(
+    codeValue: String, 
+    patientId: String, 
+    encounterId: String):DbCodeValue{
+
+    val observations = mutableListOf<PatientListViewModel.ObservationItem>()
+    fhirEngine
+      .search<Observation> {
+        filter(Observation.CODE, {value = of(Coding().apply {
+          code = codeValue
+        })})
+        filter(Observation.SUBJECT, {value = "Patient/$patientId"})
+        filter(Observation.ENCOUNTER, {value = "Encounter/$encounterId"})
+      }
+      .take(1)
+      .map { createObservationItem(it, getApplication<Application>().resources) }
+      .let { observations.addAll(it) }
+
+    //Return limited results
+    var code = ""
+    var value = ""
+    observations.forEach {
+      code = it.code
+      value = it.value
+    }
+
+    return DbCodeValue(code, value)
+
+  }
+```
