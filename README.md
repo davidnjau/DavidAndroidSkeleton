@@ -1,36 +1,51 @@
-View Binding Sample
-=============================================
-install the following dependencies
+# Android Setup
+
+A brief description of your project goes here.
+
+## Table of Contents
+
+- [Project Name](#project-name)
+  - [Table of Contents](#table-of-contents)
+  - [Binding](#binding)
+
+
+## Description
+
+Provide a concise overview of your project. Explain what it does, why it's useful, and any other relevant context.
+
+## Binding
+
+The following will enable view binding in android.
+
+- Add following in the build.gradle.kts
 ```
 buildFeatures{
-        viewBinding = true
-    }
+    viewBinding = true
+}
 ```
+- Install the following dependecies
+```
+val navVersion = "2.7.4"
+
+// Java language implementation
+implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
+implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
+
+// Kotlin
+implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
+implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
+
+// Feature module Support
+implementation("androidx.navigation:navigation-dynamic-features-fragment:$navVersion")
+
+// Testing Navigation
+androidTestImplementation("androidx.navigation:navigation-testing:$navVersion")
+
+// Jetpack Compose Integration
+implementation("androidx.navigation:navigation-compose:$navVersion")
 
 ```
-    val navVersion = "2.7.4"
-
-    // Java language implementation
-    implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
-    implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
-
-    // Kotlin
-    implementation("androidx.navigation:navigation-fragment-ktx:$navVersion")
-    implementation("androidx.navigation:navigation-ui-ktx:$navVersion")
-
-    // Feature module Support
-    implementation("androidx.navigation:navigation-dynamic-features-fragment:$navVersion")
-
-    // Testing Navigation
-    androidTestImplementation("androidx.navigation:navigation-testing:$navVersion")
-
-    // Jetpack Compose Integration
-    implementation("androidx.navigation:navigation-compose:$navVersion")
-```
-
-=============================================
-Create a navigation folder and add nav_grapg.xml
-Sample structure:
+- Create a navigation folder and add nav_graph.xml
 ```
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
@@ -58,6 +73,7 @@ Sample structure:
 </navigation>
 ```
 
+- Initial fragment setup
 ```
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
@@ -85,7 +101,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 }
 ```
 
-on the Main Activity
+- Main Activity
 ```
 <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment"
@@ -101,18 +117,26 @@ on the Main Activity
         app:navGraph="@navigation/nav_graph" />
 ```
 
-Pass data to new fragment
+- Pass data to new fragment
 ```
 
-Fragment 1
+- Fragment 1
+
 binding.btnNext.setOnClickListener {
-            val bundle = bundleOf("id" to "1")
-            view.findNavController().navigate(R.id.profileFragment,bundle)
-        }
+    val bundle = bundleOf("id" to "1")
+    view.findNavController().navigate(R.id.profileFragment,bundle)
+}
 
-Fragment 2
-        binding.tvUid.text = arguments?.getString("id")
+- Fragment 2
 
-        
+binding.tvUid.text = arguments?.getString("id")
+    
 ```
+
+
+## Installation
+
+Explain how to install and set up your project. Include any prerequisites or dependencies. You can use code blocks to show commands:
+
+
 
