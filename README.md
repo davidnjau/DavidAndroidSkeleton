@@ -288,7 +288,11 @@ dependencies {
 
 ```
 
-- Add the following under the FHIR package; FhirSyncWorker.class
+- Add the following classes:
+
+FhirSyncWorker.class, TimestampBasedDownloadWorkManagerImpl.class, ValueSetResolver.class, DemoDataStore.class, FhirApplication.class, ReferenceUrlResolver.class
+
+- FhirSyncWorker.class
 ```
 class FhirSyncWorker(appContext: Context, workerParams: WorkerParameters) :
     FhirSyncWorker(appContext, workerParams) {
